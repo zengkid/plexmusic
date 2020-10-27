@@ -30,7 +30,7 @@ class _PlayerState extends State<HomePage> {
     final session = await AudioSession.instance;
     await session.configure(AudioSessionConfiguration.speech());
 
-    if (!AudioService.running) {
+    if (AudioService.running == null || !AudioService.running) {
       AudioService.start(
         backgroundTaskEntrypoint: backgroundTaskEntrypoint,
       );

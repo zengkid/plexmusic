@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
@@ -74,11 +73,11 @@ class AudioPlayerTask extends BackgroundAudioTask {
     _audioPlayer.setLoopMode(LoopMode.all);
     _audioPlayer.setShuffleModeEnabled(false);
 
-    updateTaskUI(true, state: AudioProcessingState.connecting);
+    updateTaskUI(true, state: AudioProcessingState.ready);
 
-    _audioPlayer.play();
+    // _audioPlayer.play();
 
-    updateTaskUI(true);
+    // updateTaskUI(true);
   }
 
   @override
@@ -198,7 +197,7 @@ class AudioPlayerTask extends BackgroundAudioTask {
       {Duration position = Duration.zero,
       AudioProcessingState state = AudioProcessingState.ready}) {
     var currentIndex = _audioPlayer.currentIndex;
-    var index = max(0, currentIndex);
+    var index = currentIndex ?? 0;
     var audioSource = _audioPlayer.sequence[index];
 
     MediaItem mediaItem = audioSource.tag;
@@ -207,8 +206,8 @@ class AudioPlayerTask extends BackgroundAudioTask {
 
     var control = playing ? MediaControl.pause : MediaControl.play;
     var repeatMode =
-        AudioServiceRepeatMode.values[_audioPlayer.loopMode.index ?? 0];
-    var shuffleMode = _audioPlayer.shuffleModeEnabled
+        AudioServiceRepeatMode.values[_audioPlayer.loopMode?.index ?? 0];
+    var shuffleMode = (_audioPlayer?.shuffleModeEnabled ?? false)
         ? AudioServiceShuffleMode.all
         : AudioServiceShuffleMode.none;
     AudioServiceBackground.setState(
