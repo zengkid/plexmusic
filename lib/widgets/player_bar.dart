@@ -20,8 +20,7 @@ class PlayBar extends StatelessWidget {
             final playerState = snapshot.data;
             final processingState = playerState?.processingState;
             final playing = playerState?.playing;
-            if (processingState == AudioProcessingState.connecting ||
-                processingState == AudioProcessingState.buffering) {
+            if (processingState == AudioProcessingState.buffering) {
               return Container(
                 margin: EdgeInsets.all(8.0),
                 width: 48.0,

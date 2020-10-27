@@ -61,14 +61,12 @@ class _SeekBarState extends State<SeekBar> {
           bottom: 0.0,
           child: Text(
               RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
-                      .firstMatch("$_remaining")
+                      .firstMatch("${widget.duration}")
                       ?.group(1) ??
-                  '$_remaining',
+                  '${widget.duration}',
               style: Theme.of(context).textTheme.caption),
         ),
       ],
     );
   }
-
-  Duration get _remaining => widget.duration - widget.position;
 }

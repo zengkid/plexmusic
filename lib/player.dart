@@ -68,12 +68,12 @@ class AudioPlayerTask extends BackgroundAudioTask {
 
     var _playlist = ConcatenatingAudioSource(children: sources);
 
-    await _audioPlayer.load(_playlist);
+    _audioPlayer.load(_playlist);
 
     _audioPlayer.setLoopMode(LoopMode.all);
     _audioPlayer.setShuffleModeEnabled(false);
 
-    updateTaskUI(true, state: AudioProcessingState.ready);
+    updateTaskUI(true, state: AudioProcessingState.connecting);
 
     // _audioPlayer.play();
 
