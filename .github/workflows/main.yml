@@ -21,12 +21,15 @@ jobs:
     - run: flutter build apk
     - run: |
         flutter build ios --no-codesign
+        pushd build/ios/iphoneos 
         cd build/ios/iphoneos
         mkdir Payload
         cd Payload
         ln -s ../Runner.app
         cd ..
         zip -r app.ipa Payload
+        popd
+        
     - name: Upload to releasex
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
